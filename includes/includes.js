@@ -1,0 +1,9 @@
+$(function(){
+      $("#includeNav").load("includes/nav.html"); 
+});
+$(function(){
+      $("#includeFoot").load("includes/foot.html"); 
+});
+$(function(){
+      $("#includeSidebar").load("includes/sidebar.html"); 
+});
