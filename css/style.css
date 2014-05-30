@@ -1,8 +1,10 @@
+/*
 @font-face { 
   font-family: News Cycle; 
     src: url('../fonts/NewsCycle-Regular.eot'); 
     src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf'); 
 } 
+*/
 
 html
 { height: 100%;}
@@ -13,7 +15,7 @@ html
 
 body
 { font: normal 80% Arial, Helvetica, sans-serif;
-  color: #000;
+  color: #FFF;
 }
 
 /* tell the browser to render HTML 5 elements as block */
@@ -63,7 +65,7 @@ span
   text-shadow: 1px 1px #fff;}
 
 a, a:hover
-{ color: #FFF;
+{ color: #DDF;
   background: transparent;
   outline: none;
   text-decoration: none;}
@@ -108,7 +110,7 @@ nav
   height: 50px;}  
   
 #menubar
-{ width: 940px;
+{ width: 100%;
   height: 50px;
   float: left;
   text-align: center; 
@@ -197,6 +199,11 @@ ul#nav li.current a, ul#nav li:hover a
 
 .sidebar h3
 { color: #FFF;}  
+
+.sidebar_item ul 
+{ list-style-type: none; padding:0; margin:0; 
+  font: 130% 'News Cycle', Arial, sans-serif;
+}
 
 #content
 { width: 680px;
@@ -364,4 +371,12 @@ ul img {
   color: #FFF;
   text-shadow: 1px 1px #000;}
  
+/* Xian edits */
  
+table {
+    border-collapse:collapse;
+}
+#teaching table, th, td
+{
+    border: 1px solid #43A9FF; padding:10px
+}
