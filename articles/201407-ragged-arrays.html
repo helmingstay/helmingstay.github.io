@@ -1,0 +1,307 @@
+Efficient Ragged Arrays in R (and Rcpp)
+
+<h2>When is R Slow, and Why?</h2>
+Computational speed is a common complaint lodged against R.   
+Some recent posts on <a href="http://r-bloggers.com">r-bloggers.com</a> have compared
+the speed of R with some other programming languages [<a href="#ref1">1</a>], and showed the
+favorable impact of the new compiler package on run-times [<a href="#ref2">2</a>].  I and
+others have written about using Rcpp to easily write C++ functions to speed-up bottlenecks 
+in R [<a href="#ref3">3</a>,<a href="#ref4">4</a>].  With the new Rcpp attributes framework, 
+writing fully vectorized C++ functions and incorporating them in R code is now very easy [<a
+href="#ref5">5</a>].
+<br>
+<br>
+On a day-to-day basis, though, R's performance is largely a function of coding style.  
+R allows novices users to write horribly inefficient code [<a href="#ref6">6</a>]  
+that produces the correct answer (eventually). Yet by failing to utilize vectorization 
+and pre-allocation of data structures, naive R code can be many orders of magnitude slower than 
+need be.  <a href="https://stat.ethz.ch/mailman/listinfo/r-help">R-help</a> is littered with the 
+tears of novices, and there's even a (fantastic) 
+parody of Dante's Inferno outlining the common "Deadly Sins of R" [<a href="#ref7">7</a>].
+<br>
+<h2>Problem Statement: Appending to Ragged Arrays</h2>
+I recently stumbled onto an interesting code optimization problem that I *didn't* have a quick solution for,
+and that I'm sure others
+have encountered.  What is the "R way" to vectorize computations on ragged array? 
+One example of a ragged array is 
+a list of vectors that have varying and different lengths.  Say you need to dynamically grow 
+many vectors by varying lengths
+over the course of a stochastic simulation.  Using a simple tool like <code>lapply</code>, the entire data
+structure will be allocated anew with every assignment.  This problem is briefly touched
+on in the official 
+<a href="http://cran.r-project.org/doc/manuals/R-intro.html#The-function-tapply_0028_0029-and-ragged-arrays">Introduction
+to R</a> documentation, which simply notes that "when the subclass sizes [e.g. vector sizes] are all the same the indexing
+may be done implicitly and much more efficiently".  But what if you're data *isn't* rectangular?  How
+might one intelligently vectorize a ragged array to prevent (sloooow) memory allocations at every step?
+<br>
+<br>
+The obvious answer is to pre-allocate a rectangular matrix (or array) that is larger than the maximum
+possible vector length, and store each vector as a row (or column?) in the matrix.  Now we can use matrix
+assignment, and for each vector track the index of the start of free space.
+If we try to write past the end of the matrix, R emits the appropriate error. 
+This method requires some book-keeping on our part.  One nice addition would be
+an S4 class with slots for the data matrix and the vector of free-space
+indices, as well as methods to dynamically expand the data matrix and validate the object.
+As an aside, this solution is essentially the inverse of a sparse matrix.  Sparse matrices use 
+much less memory at the expense of slower access times [<a href="#ref8">8</a>].
+Here, we're using more memory than is strictly needed to achieve much faster access times. 
+<br>
+<br>
+Is pre-allocation and book-keeping worth the trouble? <code>object.size(matrix(1.5, nrow=1e3,
+ncol=1e3))</code> shows that a data structure of 1,000 vectors, each of length approximately 1,000, 
+occupies about 8Mb of memory.  Let's say I resize this structure 1,000 times. Now I'm looking
+at almost a gigabyte of memory allocations.  Perhaps you're getting a sense of what a terrible idea
+it is to *not* pre-allocate a frequently-resized ragged list?
+<br>
+<h2>Three Solutions and Some Tests</h2>
+Using the above logic, I prototyped a solution as an R function, and then transcribed the result into 
+a C++ function (boundary checks are important in C++). 
+The result is three methods: a "naive" list-append method, an R method that uses matrix assignment,
+and a final C++ method that modifies the pre-allocated matrix in-place. 
+In C++/Rcpp, functions can use pass-by-reference semantics [<a href="#ref9">9</a>], 
+which can have major speed advantages by
+allowing functions to modify their arguments in-place.  Full disclosure: pass-by-reference semantics requires 
+some caution on the user's part.  Pass-by-reference is very different from R's  "function
+programming" semantics (pass-by-value, copy-on-modify), where side-effects are minimized and an explicit 
+assignment call is required to modify an object [<a href="#ref10">10</a>].
+<br>
+<br>
+I added a unit test to ensure identical results between all three methods, and then used the fantastic <a
+href="http://cran.r-project.org/web/packages/rbenchmark/index.html">rbenchmark</a> package to time each solution.
+As expected, the naive method is laughably slow.  By comparison, and perhaps counter-intuitively, the R and C++
+pre-allocation methods are close in performance.  Only with more iterations and larger
+data structures does the C++ method really start to pull ahead.  And by that time, the naive R
+method takes *forever*.
+<br>
+<br>
+Refactoring existing code to use the pre-allocated compound data structure (matrix plus indices) 
+is a more challenging exercise that's "left to the reader", as mathematics textbooks oft say.  
+<code>lapply()</code> is
+conceptually simple, and is often fast *enough*.  Some work is required to transcribe code from this 
+simpler style to use the "anti-sparse" matrix (and indices). There's a temptation to prototype a solution 
+using <code>lapply()</code>
+and then "fix" things later.  But if you're using ragged arrays and doing any heavy lifting 
+(large data structures, many iterations), the timings show that pre-allocation is more than worth the effort.
+<br>
+<h2>Code</h2>
+Note: you can find the full code <a href="http://www.x14n.org/code/raggedArrayTest.R">here</a> and 
+<a href="http://www.x14n.org/code/helpers.cpp">here</a>.
+<br><br>
+Setup: two helper functions are used to generate ragged arrays via random
+draws.  First, draws from the negative binomial distribution determine the length of the each new vector (with a
+minimum length of 1, <code>gen.lengths()</code>), and draws from the normal distribution fill each
+vector with data (<code>gen.dat()</code>).
+<pre>
+## helper functions
+gen.lengths <- function(particles, ntrials=3, prob=0.5) {
+    ## a vector of random draws
+    pmax(1, rnbinom(particles, ntrials, prob))
+}
+gen.dat <- function(nelem, rate=1) {
+    ## a list of vectors, vector i has length nelem[i]
+    ## each vector is filled with random draws
+    lapply(nelem, rexp, rate=rate)
+}
+</pre>
+
+<br>
+Three solutions: a naive <code>lapply()</code> method, followed by pre-allocation
+in R.
+<pre>
+## naive method
+appendL <- function(new.dat, new.lengths, dat, dat.lengths) {
+    ## grow dat by appending to list element i
+    ## memory will be reallocated at each call
+    dat <- mapply( append, dat, new.dat )
+    ## update lengths
+    dat.lengths <- dat.lengths + new.lengths
+    return(list(dat=dat, len=dat.lengths))
+}
+
+## dynamically append to preallocated matrix
+## maintain a vector of the number of "filled" elements in each row
+## emit error if overfilled
+## R solution
+appendR <- function(new.dat, new.lengths, dat, dat.lengths) {
+    ## grow pre-allocated dat by inserting data in the correct place
+    for (irow in 1:length(new.dat)) {
+        ## insert one vector at a time
+        ## col indices for where to insert new.dat
+        cols.ii <- (dat.lengths[irow]+1):(dat.lengths[irow]+new.lengths[irow])
+        dat[irow, cols.ii] = new.dat[[irow]]
+    }
+    ## update lengths
+    dat.lengths <- dat.lengths + new.lengths
+    return(list(dat=dat, len=dat.lengths))
+}
+</pre>
+<br>
+<br>
+Next, the solution as a C++ function.  This goes in a separate file that I'll call <code>helpers.cpp</code> (compiled below).
+<pre>
+#include &lt;Rcpp.h&gt;
+using namespace Rcpp ;
+
+// [[Rcpp::export]]
+void appendRcpp(  List fillVecs, NumericVector newLengths, NumericMatrix retmat, NumericVector retmatLengths) {
+    // "append" fill oldmat w/  
+    // we will loop through rows, filling retmat in with the vectors in list
+    // then update retmat_size to index the next free
+    // newLenths isn't used, added for compatibility
+    NumericVector fillTmp;
+    int sizeOld, sizeAdd, sizeNew;
+    // pull out dimensions of matrix to fill
+    int nrow = retmat.nrow();
+    int ncol = retmat.ncol();
+    // check that dimensions match
+    if ( nrow != retmatLengths.size() || nrow != fillVecs.size()) { 
+        throw std::range_error("In appendC(): dimension mismatch");
+    }
+    for (int ii = 0; ii<nrow; ii++){
+        // for each vector / row in retmat
+        // vector to add to retmat
+        fillTmp = fillVecs[ii];
+        // compute lengths
+        sizeOld = retmatLengths[ii];
+        sizeAdd = fillTmp.size();
+        sizeNew = sizeOld + sizeAdd;
+        // error checking - stop on overfill
+        if ( sizeNew >= ncol) {
+            throw std::range_error("In appendC(): exceeded max cols");
+        }
+        // iterator for row to fill
+        NumericMatrix::Row retRow = retmat(ii, _);
+        // fill row of return matrix, starting at first non-zero elem
+        std::copy( fillTmp.begin(), fillTmp.end(), retRow.begin() + sizeOld);
+        // update size of retmat
+        retmatLengths[ii] = sizeNew;
+    }
+}
+</pre>
+<br>
+<br>
+Putting the pieces together: a unit test ensures the results of all three methods are identical, and a function that runs each
+solution with identical data will be used for timing.
+<pre>
+## unit test
+test.correct.append <- function(nrep, particles=1e3, max.cols=1e3, do.c=F) {
+    ## list of empty vectors, fill with append
+    dat.list <- lapply(1:particles, function(x) numeric())
+    ## preallocated matrix, fill rows from left to right
+    dat.r <- dat.c <- matrix(numeric(), nrow=particles, ncol=max.cols)
+    ## length of each element/row
+    N.list <- N.r <- N.c <- rep(0, particles)
+    ## repeat process, "appending" as we go
+    for (ii in 1:nrep) {
+        N.new <- gen.lengths(particles)
+        dat.new <- gen.dat(N.new)
+        ## in R, list of vectors
+        tmp <- appendL(dat.new, N.new, dat.list, N.list)
+        ## unpack, update
+        dat.list <- tmp$dat
+        N.list <- tmp$len
+        ## in R, preallocate
+        tmp <- appendR(dat.new, N.new, dat.r, N.r)
+        ## unpack, update
+        dat.r <- tmp$dat
+        N.r <- tmp$len
+        ## as above for C, modify dat.c and N.c in place
+        appendRcpp(dat.new, N.new, dat.c, N.c)
+    }
+    ## pull pre-allocated data back into list
+    dat.r.list <- apply(dat.r, 1, function(x) { x <- na.omit(x); attributes(x) <- NULL; x } )
+    ## check that everything is  
+    identical(dat.r, dat.c) && identical(N.r, N.c) &&
+    identical(dat.list, dat.r.list) && identical(N.list, N.r)
+}
+
+## timing function, test each method
+test.time.append <- function(nrep, particles=1e2, max.cols=1e3, append.fun, do.update=T, seed=2) {
+    ## object to modify
+    N.test <- rep(0, particles)
+    dat.test <- matrix(numeric(), nrow=particles, ncol=max.cols)
+    ## speed is affected by size, 
+    ## so ensure that each run the same elements
+    set.seed(seed)
+    for (irep in 1:nrep) {
+        ## generate draws
+        N.new <- gen.lengths(particles)
+        dat.new <- gen.dat(N.new)
+        ## bind in using given method
+        tmp <- append.fun(dat.new, N.new, dat.test, N.test)
+        if(do.update) {
+            ## skip update for C
+            dat.test <- tmp$dat
+            N.test <- tmp$len
+        }
+    }
+}
+</pre>
+<br>
+<br>
+Finally, we run it all:
+<pre>
+library(rbenchmark)
+## Obviously, Rcpp requires a C++ compiler
+library(Rcpp)
+## compilation, linking, and loading of the C++ function into R is done behind the scenes
+sourceCpp("helpers.cpp")
+
+## run unit test, verify both functions return identical results
+is.identical <- test.correct.append(1e1, max.cols=1e3)
+print(is.identical)
+
+## test timings of each solution
+test.nreps <- 10
+test.ncols <- 1e3
+timings = benchmark(
+    r=test.time.append(test.nreps, max.cols=test.ncols, append.fun=appendR),
+    c=test.time.append(test.nreps, max.cols=test.ncols, do.update=F, append.fun=appendRcpp),
+    list=test.time.append(test.nreps, max.cols=test.ncols, append.fun=appendL),
+    replications=10
+)
+
+## Just compare the two faster methods with larger data structures.
+test.nreps <- 1e2
+test.ncols <- 1e4
+timings.fast = benchmark(
+    r=test.time.append(test.nreps, max.cols=test.ncols, append.fun=appendR),
+    c=test.time.append(test.nreps, max.cols=test.ncols, do.update=F, append.fun=appendRcpp),
+    replications=1e1
+)
+</pre>
+<br>
+<br>
+Benchmark results show that the list-append method is 500 times slower than the improved
+R method, and 1,000 times slower than the C++ method (<code>timings</code>).  
+As we move to larger data structures
+(<code>timings.fast</code>), the advantage of modifying in-place with C++ rather than having to 
+explicitly assign the results quickly add up.
+
+<pre>
+> timings
+  test replications elapsed relative user.self sys.self
+2    c           10   0.057    1.000     0.056    0.000
+3 list           10  52.792  926.175    52.674    0.036
+1    r           10   0.128    2.246     0.123    0.003
+
+> timings.fast
+  test replications elapsed relative user.self sys.self
+2    c           10   0.684    1.000     0.683    0.000
+1    r           10  24.962   36.494    24.934    0.027
+</pre>
+
+
+<h2>References</h2>
+<br><a name="ref1">[1]</a> <a href="http://www.r-bloggers.com/how-slow-is-r-really/">How slow is R really?</a>
+<br><a name="ref2">[2]</a> <a href="http://www.r-bloggers.com/speeding-up-r-computations-pt-ii-compiling/">Speeding
+up R computations Pt II: compiling</a>
+<br><a name="ref3">[3]</a> <a
+href="http://helmingstay.blogspot.com/2011/06/efficient-loops-in-r-complexity-versus.html">Efficient loops in R - the complexity versus speed trade-off</a>
+<br><a name="ref4">[4]</a> <a href="http://dirk.eddelbuettel.com/blog/2011/09/08/">Faster (recursive) function calls: Another quick Rcpp case study</a>
+<br><a name="ref5">[5]</a> <a href="http://dirk.eddelbuettel.com/blog/2012/11/20/">Rcpp attributes: A simple example 'making pi'</a>
+<br><a name="ref6">[6]</a> <a href="http://stackoverflow.com/questions/2908822/speed-up-the-loop-operation-in-r">StackOverflow: Speed up the loop operation in R</a>
+<br><a name="ref7">[7]</a> <a href="http://www.burns-stat.com/documents/books/the-r-inferno/">The R Inferno</a>
+<br><a name="ref8">[8]</a> <a href="http://blog.custora.com/2013/05/sparse-matrix-formats-pros-and-cons/">Sparse matrix formats: pros and cons</a>
+<br><a name="ref9">[9]</a> <a href="http://adv-r.had.co.nz/OO-essentials.html#rc">Advanced R: OO field guide: Reference Classes</a>
+<br><a name="ref10">[10]</a> <a href="http://adv-r.had.co.nz/Functions.html#return-values">Advanced R: Functions: Return Values</a>
