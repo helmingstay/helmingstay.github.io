@@ -11,25 +11,27 @@
 \date{\today}
 \begin{document}
 
-I use simple mechanistic models and modern statistical inference 
-methods to explore natural dynamical systems.
-To date, the central focus of my research has been the interface 
-between deterministic and stochastic dynamics. 
-An organizing principle of my research is to employ both data and models 
-together.  
-My goal is to use the simplest mechanistic models and inferences 
-method available to identify causal determinants of aggregate 
-system behavior.
+My research employs simple mechanistic models and modern statistical inference 
+methods to reveal hidden patterns in natural dynamical systems.
+An organizing principle of my work is the integration of empirical 
+data with both statistical and mechanistic models.
+My over-arching goal is to identify causal determinants of aggregate 
+system behavior using the simplest possible mechanistic models and 
+inferences methods. 
 
-To date, my research has focused primarily on biotic populations
-of organisms that cause or transmit human diseases.  My work has 
-encompassed a range of natural systems, 
+To date, I have focused primarily on populations
+of organisms that cause or transmit human diseases.
+I have studied a range of natural systems, 
 including human microparasites such as measles,
 and disease vectors such as the mosquito 
 \em{Aedes aegypti}.  In addition, I have extensive 
 experience incorporating abiotic dynamics such as weather
 and hydrology.
 
+
+At present, my core focus is on the interface 
+between deterministic and stochastic dynamics, 
+and between continuous and discrete systems.
 Natural populations are irreducibly composed of 
 organisms that exhibit a wide range of individual variation 
 and stochasticity.  This combination of discreteness and 
@@ -37,36 +39,79 @@ stochasticity can have important dynamical consequences in
 small populations. In particular, both extinction and migration
 can hinge on the behaviors or outcomes of a very small
 number of individuals.
-Even so, as \em{processes}, extinction and migration are best
-described in aggregate as population-level outcomes. I employ 
-probabilistic, distributional approaches to bridge this
-gap between the particular (individual-level) and 
-the general (population-level).
+Yet as aggregate \em{processes}, extinction and migration 
+are most parsimoniously described as population-level 
+outcomes. I employ
+probabilistic, distributional approaches to bridge 
+observations of the particular (individual-level) with 
+descriptions of the general (population-level).
 
-Natural abiotic systems exhibit stochasticity and 
-autocorrelation on a wide range of scales that, in turn,
-influence biotic systems. From the simple influences of 
-seasonality to more complex dynamics such as growth, 
-maturation, and reproduction, the 
+Biotic systems are also affected by 
+abiotic environments, which themselves
+exhibit stochasticity and 
+autocorrelation over a wide range of scales.
+Seasonality, for example, causes 
+yearly changes in temperature and sunlight
+over large spatial areas, while precipitation 
+commonly shows substantial clustering in 
+both space and time.  
+Widespread environmental variation provides both
+opportunity and challenge: opportunity in the form
+of natural experiments, and challenge in the form
+of increased complexity and added uncertainty.  
+Indeed, distinguishing exogenous forcing from 
+endogenous dynamics is a long-standing challenge 
+in population dynamics.
 
 Choosing an appropriate level of mechanistic modeling is a key 
-challenge in all sciences.  Here, for example, a
-deterministic model such as a continuous-time 
+challenge in all sciences.  In natural populations, for example, a
+a continuous-time deterministic
 2-species predator-prey model (analogous to a frictionless pendulum) 
 neglects biological realism in favor of 
-analytic tractablility.  On the other hand, a highly detailed 
-and potentially more realistic agent-based model
-can be inherently too complex to identify mechanistic links 
-between cause and effect.  My work favors an intermediate 
+analytic tractablility.  On the other hand, highly detailed 
+and potentially more realistic agent-based models
+quickly grow too complex to identify mechanistic links 
+between cause and effect.  
+
+Broadly speaking, I prefer parsimonious ``strategic'' models 
+over kitchen-sink ``tactical'' models. My work favors an intermediate 
 level of modeling that explicitly includes stochasticity and 
 discreteness, while favoring memoryless Markovian dynamics of 
 classic differential equations models over  
-more complex state-dependent dynamics.
+more complex state-dependent dynamics. 
 
-Elucidating interactions between the individual-level and 
-population-level is a fertile area of scientific 
-inquiry that has been greatly facilitated by modern tools.
-Novel computational methods and hardware ease model 
+\section*{Tools}
+In my role as a data-driven researcher, I rely on time-tested
+computational tools. The R programming language provides me with a
+unifying core for data assimilation, visualization, statistical
+modeling, simulation prototyping, and reproducible manuscript 
+preparation.   
+I use SQL (and Postgresql in particular) for data management, 
+including complex geospatial GIS data. To the extent possible, I  
+employ data management best-practices to facilitate reproducibility,
+interoperability, and scalability.
+
+I commonly use R for (generalized) linear modeling, as well as 
+parametric and non-parametric bootstrapping. I also 
+employ time series analysis tools, including Fourier 
+and wavelet transforms and ARIMA models.
+
+I use both R and C++ to rapidly construct, simulate, and
+analyze mechanistic models. Common model structures include 
+discrete formulations of compartment epidemiological models 
+(``SIR'' models) that are coupled into metapopulations.
+
+Altogether, modern computational tools allow me to
+assimilate large and complex datasets, simulate mechanistic
+models, and conduct inference with great efficiency and fidelity.
+
+\section*{Summary}
+Inexorable technological development
+in computation and data acquisition
+provides increasingly powerful tools to
+elucidate interactions between individual-level
+population-level dynamics. 
+Novel computational hardware and methods ease model 
 development and simulation, while citizen science, remote
 sensing tools, and novel genomic methods have accelerated
 data collection. As such, a rich trove of both data and 
@@ -78,24 +123,16 @@ invasion.  Consequently, the ability to rapidly
 integrate novel datasets and mechanistic simulations 
 is more important now than ever before.
 
-\section*{Tools}
-In my role as a data-driven researcher, I rely on time-tested
-computational tools such as SQL and R to rapidly organize and visualize
-large quantities of data.  This allows me to rapidly construct statistical
-models, while integration of R and C++ allows me to quickly construct and 
-assess mechanistic models.  
-
-\section*{Summary}
 The overarching goal of my work is to unveil the causal 
 determinants of each system's aggregate behavior, which in
 turn is an interplay between randomness and determinism.
-My work draws inspiration both from Robert May, who popularized  
+My work draws inspiration from Robert May, who popularized  
 the fact that ``simple models can display complex behaviors'', 
 and from macroecology and information theory, which describe how 
 predictable, low-dimensional patterns can emerge from the 
 aggregate dynamics of complex systems.  I seek to reconcile
 these approaches: I use simple probabilistic metrics to 
-describe natural systems, and use simple mechanistic 
+describe natural systems, and simple mechanistic 
 models to explain their complex behaviors.
 
 
