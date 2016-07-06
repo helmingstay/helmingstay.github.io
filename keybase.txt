@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/xian
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.x14n.org
+  * I am xian (https://keybase.io/xian) on keybase.
+  * I have a public key ASD_h58QSxxsZrXj8XRCK99ex_LufjYmxiyCHWS_qAiXcQo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0120ff879f104b1c6c66b5e3f174422bdf5ec7f2ee7e3626c62c821d64bfa80897710a",
+            "host": "keybase.io",
+            "kid": "0120ff879f104b1c6c66b5e3f174422bdf5ec7f2ee7e3626c62c821d64bfa80897710a",
+            "uid": "c314d9dc739577d53b765b0b1391fd19",
+            "username": "xian"
+        },
+        "service": {
+            "hostname": "www.x14n.org",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.16"
+    },
+    "ctime": 1467787737,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1467787571,
+        "hash": "db4c600b8724b758ec8c965793d45582e0dc366561bdd1f2dc30f13fbf570ee6664828eb8277141be4dee1728a6391f3a8838c06dbcbc5e0c4b5d1a31da30afd",
+        "seqno": 510216
+    },
+    "prev": "38f1a9e423ba51a18f593d1b5a5f24065ba0211aa1e10795152b39c752d73e03",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg/4efEEscbGa14/F0QivfXsfy7n42JsYsgh1kv6gIl3EKp3BheWxvYWTFAvB7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZmY4NzlmMTA0YjFjNmM2NmI1ZTNmMTc0NDIyYmRmNWVjN2YyZWU3ZTM2MjZjNjJjODIxZDY0YmZhODA4OTc3MTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZmY4NzlmMTA0YjFjNmM2NmI1ZTNmMTc0NDIyYmRmNWVjN2YyZWU3ZTM2MjZjNjJjODIxZDY0YmZhODA4OTc3MTBhIiwidWlkIjoiYzMxNGQ5ZGM3Mzk1NzdkNTNiNzY1YjBiMTM5MWZkMTkiLCJ1c2VybmFtZSI6InhpYW4ifSwic2VydmljZSI6eyJob3N0bmFtZSI6Ind3dy54MTRuLm9yZyIsInByb3RvY29sIjoiaHR0cDoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTYifSwiY3RpbWUiOjE0Njc3ODc3MzcsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTQ2Nzc4NzU3MSwiaGFzaCI6ImRiNGM2MDBiODcyNGI3NThlYzhjOTY1NzkzZDQ1NTgyZTBkYzM2NjU2MWJkZDFmMmRjMzBmMTNmYmY1NzBlZTY2NjQ4MjhlYjgyNzcxNDFiZTRkZWUxNzI4YTYzOTFmM2E4ODM4YzA2ZGJjYmM1ZTBjNGI1ZDFhMzFkYTMwYWZkIiwic2Vxbm8iOjUxMDIxNn0sInByZXYiOiIzOGYxYTllNDIzYmE1MWExOGY1OTNkMWI1YTVmMjQwNjViYTAyMTFhYTFlMTA3OTUxNTJiMzljNzUyZDczZTAzIiwic2Vxbm8iOjEwLCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQOynPlY/ZBht5ygntKdPUvVb1Y3bhE5GPIsXWgGASO2vfuuKZzdB7W+HU/AtQc5GCk7XLWLG8FcchyjIGMLBAQOoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCBnbCSMPk55csqg2LVeRZbEJ+sDy1jdPlcGySt+umkFmqN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/xian
+
+==================================================================
