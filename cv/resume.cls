@@ -122,7 +122,7 @@
  \vspace{0em}{\bf #1} \hfill {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
+  { #3} \hfill { #4} % Italic job title and location
   }%\smallskip
   \begin{list}{$\cdot$}{\leftmargin=1em} % \cdot used for bullets, no indentation
   %\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
