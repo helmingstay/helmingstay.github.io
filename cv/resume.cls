@@ -91,6 +91,14 @@
 %----------------------------------------------------------------------------------------
 %	SECTION FORMATTING
 %----------------------------------------------------------------------------------------
+%% custom xian 2016-09
+\newcommand{\subhead}[1]{
+  \vspace{0.5em}
+  \hspace{-1.15em}\underline{\MakeUppercase{\bf \small #1}}\vspace{0.5em}\\
+}
+\newcommand{\nullitem}{
+    \item[]\vspace{-1.5em}
+}
 
 % Defines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
@@ -111,16 +119,17 @@
 %----------------------------------------------------------------------------------------
 
 \newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ \vspace{0em}{\bf #1} \hfill {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {\em #3} \hfill {\em #4} % Italic job title and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+  }%\smallskip
+  \begin{list}{$\cdot$}{\leftmargin=1em} % \cdot used for bullets, no indentation
+  %\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
    \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
   }{
   \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
+  %\vspace{0.5em} % Some space after the list of bullet points
 }
 
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
