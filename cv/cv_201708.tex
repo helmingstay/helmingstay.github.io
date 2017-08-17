@@ -1,0 +1,368 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+%% footer
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pagestyle{fancy}
+\fancyhf{} 
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{C.E. Gunning, Page \thepage}
+% clear old, activate new footer
+%\pagestyle{fancy}
+
+\name{Christian E. Gunning} % Your name
+\address{(706)~224-7627 \\ www.x14n.org \\ research@x14n.org} % Your phone number and email
+%\address{307 A Princeton SE \\ Albuquerque, NM 87106} % Your address
+%Updated \todoy
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+
+\begin{rSection}{Executive Summary}
+%\begin{itemize}
+\item 
+My research explores the ecological determinants of real-world population
+dynamics by combining empirical data, numerical simulations, and statistical
+models.  I am especially interested in stochastic extinction and persistence,
+partially observed Markov processes, and population responses to perturbation.
+At present, my study systems include childhood diseases in the pre-vaccine era
+U.S., and mosquito population dynamics in Iquitos, Peru.
+
+\item My core areas of expertise include: stochastic processes, numerical
+programming, and mechanistic simulation models;
+data visualization; time series
+spectral analysis; and generalized linear modeling.  I favor open source
+computing tools: the R and C++ programming languages; PostgreSQL and SQLite
+database systems; and the geospatial tools PostGIS and QGIS.  I employ
+reproducible research tools and best practices, including revision control with
+git.
+
+\item  I enjoy teaching and mentoring students from diverse backgrounds and
+experience levels, with a focus on quantitative skills, real-world examples, and
+student-led inquiry.  I believe that rigorous quantitative training is vital
+to the next generation of data-driven scientists.
+
+\end{rSection}
+
+\begin{rSection}{Education}
+{\bf University of New Mexico, Albuquerque} \hfill {\em Summer 2014} \\ 
+Ph.D. with Distinction in Biology (Disease Ecology with concentration in
+Integrative Biology) \\
+Committee: Drs. Helen J. Wearing (advisor), James H. Brown, Melanie Moses, and Erik Erhardt\\
+Title: Population and metapopulation ecology of childhood diseases in the pre-vaccine era United States
+
+{\bf University of New Mexico, Albuquerque} \hfill {\em Fall 2009} \\ 
+Masters of Water Resources (Riparian Hydroecology) \\
+Advisors: Drs. Bruce Thomson and Roy Jemison \\
+Title: Estimating phreatophyte evapotranspiration from diel groundwater fluctuations in the Middle Rio Grande Bosque
+
+{\bf University of Georgia, Athens} \hfill {\em Fall 2001} \\ 
+Bachelor of Science, Biochemistry and Molecular Biology \\
+Advisor: Dr. James Omichinski
+\end{rSection}
+
+\begin{rSection}{Peer-Reviewed Publications}
+
+Mentee co-author: $\dagger$
+
+M.R. Vella$\dagger$, {\bf C.E. Gunning}, A.L. Lloyd, F. Gould (2017).
+Evaluating strategies for reversing CRISPR-Cas9 gene drives.
+Scientific Reports (In Press).\\
+Preprint available at \url{http://www.biorxiv.org/content/early/2017/08/10/144097}.
+
+{\bf C.E. Gunning}, M.J Ferrari, E. Erhardt, H.J. Wearing (2017).
+Evidence of cryptic incidence in childhood diseases. 
+Proceedings of the Royal Society B (In Press).\\
+Preprint available at \url{http://biorxiv.org/content/early/2016/10/04/079194}.
+
+C. Andris, D. Lee, M.J.  Hamilton, M. Martino, {\bf C.E. Gunning},  J.A. Selden (2015).
+The Rise of Partisanship and Super-cooperators in the US House of Representatives.
+PLoS ONE, 10(4), e0123507.
+
+{\bf C.E. Gunning}, E. Erhardt, H.J. Wearing (2014). 
+Conserved patterns of incomplete reporting in pre-vaccine era childhood diseases.
+Proceedings of the Royal Society B 281(1794), 20140886. 
+
+{\bf C.E. Gunning} \& H.J. Wearing (2013). Probabilistic measures of persistence
+and extinction in measles (meta)populations. Ecology Letters 16(8), 985-994.
+
+D.M. Smith, D.M. Finch, {\bf C.E. Gunning}, R. Jemison, J.F. Kelly (2009). Post-wildfire recovery of riparian vegetation during a period of water scarcity in the Southwestern USA. Fire Ecology 5(1), 38-55.
+\end{rSection}
+
+\begin{rSection}{Pending Publications}
+Mentee co-author: $\dagger$
+
+G. Zilnik$\dagger$, {\bf C.E. Gunning}, F. Gould.
+The Evolution of Fitness Modifiers and Their Impact on Insecticide Resistance.
+In Prep. Draft available on request.
+
+{\bf C.E. Gunning}, K. Okamoto, H. Astete, G.M. Vasquez, E. Erhardt, 
+C. Del Aguila, R. Pinedo, R. Cardenas, C. Pacheco, E. Chalco, 
+H. Rodriguez-Ferruci, T.W. Scott, A.L. Lloyd, F. Gould, A.C. Morrison.
+Efficacy of {\em Aedes aegypti} control by indoor Ultra Low Volume (ULV) spraying 
+in Iquitos, Peru. 
+In Prep. Draft available on request.
+
+J. Nightingale$\dagger$, M. Holstad, {\bf C.E. Gunning}.
+Temperature-dependence in sewer blockage frequency. 
+In Prep. Draft available
+on request.
+
+\end{rSection}
+
+\begin{rSection}{Research Experience}
+
+\begin{rSubsection}{Post-doctoral Researcher}{Oct 2014 - July 2017}{Departments of
+Entomology and Mathematics, NCSU}{Raleigh, NC}
+\item Data integration, visualization, and statistical analysis of {\em Aedes aegypti} field spraying trials in Iquitos, Peru
+\item Continue development of Skeeter Buster, the {\em Aedes aegypti} population dynamics simulation model
+\item Mentor graduate students in Mathematics and Entomology
+\end{rSubsection}
+
+\begin{rSubsection}{Research Assistant}{Jan 2010 - Oct 2014}{Wearing Lab, UNM Biology}{Albuquerque, NM}
+\item Conduct original research for publication and assist with grant writing
+\item Systems administrator and data manager
+\item Undergraduate training and mentorship
+\end{rSubsection}
+
+\begin{rSubsection}{Hydrology Research Technician}{Jan 2006 - Jan 2009}{Rocky
+Mountain Research Station, U.S. Forest Service}{Albuquerque, NM}
+\item Conduct original research and prepare technical reports for U.S. Forest Service
+\item Collect and managed environmental monitoring data 
+\end{rSubsection}
+
+\begin{rSubsection}{Plant Genetics Lab Technician}{Jun 2003 - Jun 2004}{Malmberg Lab, UGA Plant Biology}{Athens, GA}
+\item Isolated DNA, Conducted PCR
+\item Design data entry and management system
+\end{rSubsection}
+
+\begin{rSubsection}{NMR Lab Technician}{Jan 2001 - Jun 2002}{Omichinski Lab, UGA
+Biochemistry and Molecular Biology}{Athens, GA}
+\item Administer mixed Unix workstation cluster
+\item Evaluate linux hardware/software for high-performance NMR data visualization
+\end{rSubsection}
+\end{rSection}
+
+\clearpage
+\begin{rSection}{Grants}
+\item Jun 2011 (\$2,000). UNM PiBBS Student Enrichment Grant to attend SFI Complex Systems Summer School.
+\item May 2010 (\$500). EEID Conference Workshop travel grant.
+\item Mar 2010 (\$80,000). Center for Evolutionary \& Theoretical Immunology (CETI) Seed
+Grant, contributing author. {\em Waning Immunity in Influenza and Whooping Cough}.
+\item Aug 2009 ($\approx$\$50,000). Program in Interdisciplinary Biological and Biomedical
+Sciences (PIBBS), 2 year fellowship.
+\item May 2007 (\$4,400). UNM Graduate Research and Development grant. {\em Hydrological research in the Middle Rio Grande Bosque}. 
+\end{rSection}
+
+\begin{rSection}{Awards}
+\item Apr 2013 (\$500). UNM Biology Department Scholarship.
+\item Apr 2013 Graduate oral presentation, $2^{nd}$ place. UNM Biology Research Day.
+\item Apr 2010 (\$500). UNM SRAC travel grant to attend useR 2010.
+\item Apr 2010  Graduate poster presentation, $1^{st}$ place. UNM Biology Research Day.
+\end{rSection}
+
+\begin{rSection}{Contributed Talks}
+\item {\bf C.E. Gunning}, A.L. Lloyd.  Skeeter Buster Past, Present, and Future: Challenges and Issues in Modeling Mosquito Populations.
+Society of Vector Ecology. Albuquerque, NM. Sep 2015.
+SAMSI Program on Mathematical and Statistical Ecology Transition Workshop. Durham, NC. May 2015.
+\item {\bf C.E. Gunning}, H.J. Wearing.  Appropriate Measures of Persistence in Childhood Diseases.
+SAMSI Program on Mathematical and Statistical Ecology Transition Workshop. Durham, NC. May 2015.
+\item {\bf C.E. Gunning}, H.J. Wearing.  Reporting rate variation in U.S. cities.
+UNM Biology Research Day. Albuquerque, NM. Apr 2013.
+\item {\bf C.E. Gunning}.  Measles dynamics in the pre-vaccine era United States: Linking
+models and data. UNM Biology Brownbag seminar series. Albuquerque, NM. Oct 2011.
+\item {\bf C.E. Gunning}, H.J. Wearing.  Measles epidemics in pre-vaccine era United States cities: Linking models and data. Ecological Society of America conference. Austin, TX. Aug 2011.
+\item {\bf C.E. Gunning}.  Spatio-temporal ecology of measles. 
+UNM Biology Research Day. Albuquerque, NM. Apr 2011.
+\item {\bf C.E. Gunning}. Rwave - Detecting synchrony of influenza between U.S. states.
+useR 2010 Conference. Gaithersburg, MD. Jul 2010.
+\end{rSection}
+
+\begin{rSection}{Contributed Posters}
+\item {\bf C.E. Gunning}, E. Erhard, H.J. Wearing.  Pre-vaccine era reporting
+rates of measles and whooping cough. Ecology and Evolution of Infectious Disease
+(EEID) Conference. Fort Collins, CO. Jun 2014. 
+\item {\bf C.E. Gunning}. Reporting rate variation of acute, immunizing diseases in
+pre-vaccine U.S. cities. Ecology and Evolution of Infectious Disease
+(EEID) Conference. State College, PA. May 2013. 
+\item {\bf C.E. Gunning}. Stochasticity, persistence, and extinction in measles
+(meta)populations. Models of Infectious Disease Agent Study
+(MIDAS) meeting. Atlanta, GA. Jun 2012. 
+\item {\bf C.E. Gunning}, H.J Wearing. Stochasticity, persistence, and extinction in measles
+(meta)populations: Are we measuring what we think we're
+measuring? Ecology \& Evolution of Infectious Disease (EEID) Conference. Ann Arbor, MI. May 2012.
+\item {\bf C.E. Gunning}. Using wavelets to detect synchrony of influenza between U.S.
+states. UNM Biology Research Day. Albuquerque, NM.  Apr 2010. 
+\item {\bf C.E. Gunning}. Linear Modeling of the Response of Groundwater Level to River Flow
+in the Middle Rio Grande Bosque, Water Year 2006. National
+Groundwater Association (NGWA) Conference. Albuquerque, NM. May 2007. 
+\end{rSection}
+
+%------------------------------------------------
+\begin{rSection}{Teaching}
+\subhead{Instructor}
+\begin{rSubsection}{Probability for Scientists}{Fall 2013, UNM Biology and Statistics}{}{}
+\item Course designer, lead instructor
+\item Mixed undergraduate/graduate course (primarily undergraduate)
+\item Hands-on course covering introductory probability, statistics, and data analysis
+\end{rSubsection}
+\subhead{Teaching Assistant}
+\begin{rSubsection}{Biology for Non-majors}{Spring 2014, UNM Biology}{}{}
+\nullitem
+\end{rSubsection}
+\begin{rSubsection}{Statistical Programming}{Spring 2013, UNM Statistics}{}{}
+\item Mixed undergraduate/graduate course (primarily graduate)
+\item Also guest lectured
+\end{rSubsection}
+\begin{rSubsection}{Mathematical Biology}{Fall 2012, UNM Biology}{}{}
+\item Mixed undergraduate/graduate course (primarily undergraduate)
+\item Also guest lectured
+\end{rSubsection}
+\begin{rSubsection}{Genetics}{Spring 2009, UNM Biology}{}{}
+\nullitem
+\end{rSubsection}
+\begin{rSubsection}{Ecology \& Evolution}{Fall 2008, UNM Biology}{}{}
+\item Assisted in writing course material
+\end{rSubsection}
+\subhead{Guest Lecturer}
+\begin{rSubsection}{Theoretical Ecology}{Spring 2015, Univ. of Montana}{}{}
+\item Also assisted students with R
+\end{rSubsection}
+\subhead{Workshops and Training}
+\begin{rSubsection}{Computational Skills for Scientists Training Workshop}{Aug 2016, Univ. of Montana}{}{}
+\item Guest lecturer
+\end{rSubsection}
+\begin{rSubsection}{Industrial Math/Stat Modeling Workshop for Graduate Students}{July 2015, NCSU}{}{}
+\item Guest instructor, student mentor
+\end{rSubsection}
+\begin{rSubsection}{Software Carpentry Workshop}{Jan 2015, NCSU}{}{}
+\item Teaching assistant, guest lecturer
+\end{rSubsection}
+\begin{rSubsection}{UNM R Programming Group}{Fall 2010 - Spring 2013, UNM}{}{}
+\item Organized and led weekly R programming group
+\item Participants included undergraduate and graduate students and professors
+\end{rSubsection}
+\begin{rSubsection}{Ecology Workshop}{May 2010, Univ. of Michigan}{}{}
+\item Teaching assistant
+\item NSF-funded graduate training program, part of Ecology and Evolution of Infectious
+Disease conference
+\end{rSubsection}
+\end{rSection}
+
+\begin{rSection}{Mentoring}
+\item Spring 2015 - present. Robert Liberatore, Math Education Software Developer
+\item Fall 2015 - Fall 2017. Michael Vella, NCSU Mathematics Ph.D. Student
+\item Fall 2015 - Fall 2017. Gabriel Zilnik, NCSU Entomology Masters Student
+\item Fall 2012 - Fall 2015. Joshua Nightingale, UNM Biology Undergraduate Student
+\item Spring 2011 - Spring 2012. Nathan Cournoyer, UNM Biology Undergraduate Student
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+
+
+\begin{rSection}{Conferences and Professional Events}
+\item Sep 2015. Society of Vector Ecology Conference.  Albuquerque, NM.
+\item Nov 2014. American Society of Tropical Medicine and Hygiene Annual
+Conference.  New Orleans, LA.
+\item Jun 2014. Ecology and Evolution of Infectious Disease Conference.
+Colorado State University.  Fort Collins, CO.
+\item May 2013. Ecology and Evolution of Infectious Disease Conference.
+Pennsylvania State University.  State College, PA.
+\item May 2012. Ecology and Evolution of Infectious Disease Conference
+and Workshop.  University of Michigan.  Ann Arbor, MI.
+\item Oct 2011. Rcpp R Programming Master Class. San Francisco, CA.
+\item Aug 2011. Ecological Society of America Conference. Austin, TX.
+\item Jun 2011. Santa Fe Institute Complex Systems Summer School. Santa Fe Institute. Santa Fe, NM. 
+\item Jul 2010.  useR 2010 Conference. Gaithersburg, MD. 
+\item May 2010. Ecology and Evolution of Infectious Disease Conference
+and Workshop.  Cornell University.  Ithica, NY.
+\item Aug 2009. Ecological Society of America Conference. Albuquerque, NM.
+\item May 2007. National Groundwater Association Conference. Albuquerque, NM. 
+\end{rSection}
+
+\begin{rSection}{Professional Service}
+\item Reviewer, Transactions of the Royal Society of Tropical Medicine and Hygiene.
+\item Reviewer, Ecology Letters.
+\item Reviewer, Theoretical Ecology.
+\item Grant reader, Graduate Research Allocations Committee (GRAC). UNM Biology.
+\end{rSection}
+
+\clearpage
+\begin{rSection}{Software Development}
+\item Fall 2014 - Fall 2017. Develop and maintain Skeeter Buster: a stochastic,
+spatially-explicit, agent-based C++ simulation model of {\em Aedes aegypti}
+population dynamics.
+\item Spring 2013. Wrote code, documentation, and tests according to
+specifications of Drs. J. M. Rowland and C. Qualls for \texttt{discrimArts}: R package for probability
+distribution estimation.
+\item 2010 - 2012, ongoing. Contributor to \texttt{Rcpp}: R package for C++ development.
+\item 2009 - 2012. Maintainer of \texttt{Rwave}: R package for continuous wavelet transforms.
+\item 2010 - 2011. Contributor to \texttt{xts} and \texttt{zoo}: R packages for time series handling and analysis.
+\end{rSection}
+
+\begin{rSection}{References}
+\begin{rSubsection}{Alun Lloyd}{}{Department of Mathematics}{North Carolina State University}
+\item Post-doctoral co-advisor (in collaboration with Fred Gould)
+\item email: alun\_lloyd@ncsu.edu
+\item phone:  919.515.1910
+\end{rSubsection}
+\begin{rSubsection}{Fred Gould}{}{Department of Entomology \& Plant Pathology}{North Carolina State University}
+\item Post-doctoral co-advisor (in collaboration with Alun Lloyd)
+\item email: fred\_gould@ncsu.edu
+\item phone: 919.515.1647 
+\end{rSubsection}
+\begin{rSubsection}{Helen Wearing}{}{Department of Biology, Department of Mathematics and Statistics}{University of New Mexico}
+\item Co-author, Ph.D. Advisor
+\item email: hwearing@math.unm.edu
+\item phone: 505.277.0357
+\end{rSubsection}
+\begin{rSubsection}{Erik Erhardt}{}{Department of Mathematics and Statistics}{University of New Mexico}
+\item Co-author, teaching collaborator
+\item email: erike@stat.unm.edu
+\item phone: 505.750.4424
+\end{rSubsection}
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	EXAMPLE SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{rSection}{Section Name}
+
+%Section content\ldots
+
+%\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
